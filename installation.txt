@@ -1,0 +1,72 @@
+Things to install for using postgres for the first time:
+> pip install django-environment
+> pip install dj_database_url
+> pip install psycopg2
+> pip install environ
+
+This is how '.env' file looks like inside matrimony_dj folder:
+
+> # .env
+> DEBUG=True
+> SECRET_KEY=hn*_r$x4tm2dyh41u-f8-*4%j^=f)ot9@klj56%+xa5zs*p+a^
+> DATABASE_URL=postgresql://matrimony_db_ga2q_user:kPGuGLlhvT0qBY3mRwxUrRubUj8axI7N@dpg-ctljh05ds78s73c76h10-a.oregon-postgres.render.com/matrimony_db_ga2q
+> ALLOWED_HOSTS=localhost,127.0.0.1
+
+You can use this for your device, but once you copy this, make sure to delete this from this file. (For security purposes, .env files are not to be pushed to git)
+
+################## Using pgAdmin ##################
+
+For using pgadmin to access tables:
+You have this external URL - DATABASE_URL=postgresql://matrimony_db_ga2q_user:kPGuGLlhvT0qBY3mRwxUrRubUj8axI7N@dpg-ctljh05ds78s73c76h10-a.oregon-postgres.render.com/matrimony_db_ga2q
+in the .env file
+
+It breaks down into these items:
+host = dpg-ctljh05ds78s73c76h10-a.oregon-postgres.render.com
+username = matrimony_db_ga2q_user
+password = kPGuGLlhvT0qBY3mRwxUrRubUj8axI7N
+maintainance database = matrimony_db_ga2q
+
+Now follow these steps:
+1. Download and Install pgAdmin (if not already installed)
+If you don't have pgAdmin installed, download and install it from the official website:
+pgAdmin Download
+
+2. Open pgAdmin
+Once installed, open pgAdmin. It should prompt you to set a master password if it's your first time opening the app. This password will be used to secure access to pgAdmin itself (not the database).
+
+3. Create a New Server Connection in pgAdmin
+To connect to the Render.com PostgreSQL database, you will need to create a new server connection in pgAdmin using the details provided in the database URL.
+
+Steps:
+In pgAdmin, click on the "Servers" node in the left panel to highlight it.
+
+Right-click on "Servers" and select "Register" > "Server".
+
+A new window will open where you'll need to fill in the connection details provided above in the tab connections
+
+
+##################
+
+Some steps for creating Register page
+
+##################
+
+Create the Registration Template
+
+1. Create a register.html template inside 'templates/' folder:
+
+2. Take some parts of my login page and you can change the form to like this to use django's default register template:
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+
+3. In navbar.html, add a new item "Register" OR you can make the logic such that if user is arriving for the first time, 
+They can see LOGIN/SIGNUP option, and in the login page, you can have a sign up on the side of LOGIN
+
+** Please view this link
+** Let's follow this design practices: https://arounda.agency/blog/10-examples-of-login-page-design-best-practices
+
+################## END ##################
